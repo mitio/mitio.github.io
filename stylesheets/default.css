@@ -33,6 +33,10 @@ a {
 	text-decoration: none;
 }
 
+a img {
+	border-width: 0;
+}
+
 a strong {
 	letter-spacing: 1px;
 	color: #567;

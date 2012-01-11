@@ -11,7 +11,7 @@ body {
 }
 
 #main {
-	width: 550px;
+	width: 610px;
 	margin: 7em auto;
 	text-align: left;
 	text-align: right;
@@ -41,6 +41,38 @@ a strong {
 	letter-spacing: 1px;
 	color: #567;
 	font-weight: normal;
+}
+
+blockquote {
+	position: relative;
+	margin: 1.5em 0;
+	padding: 0;
+	font-style: italic;
+	color: #777;
+}
+
+blockquote .quote {
+	position: absolute;
+	top: -0.2em;
+	left: -0.2em;
+	width: 1em;
+	text-align: left;
+	color: #89a;
+	font-family: arial, sans-serif;
+	font-size: 14em;
+	line-height: 1em;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+}
+
+blockquote p {
+	position: relative;
+	margin: 0.5em 0;
+}
+
+blockquote .by {
+	text-align: right;
+	font-style: normal;
 }
 
 ul {

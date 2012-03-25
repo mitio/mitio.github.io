@@ -75,6 +75,10 @@ blockquote .by {
 	font-style: normal;
 }
 
+.by {
+	text-align: right;
+}
+
 ul {
 	padding-left: 0;
 	list-style: none;

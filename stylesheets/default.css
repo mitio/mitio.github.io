@@ -1,5 +1,5 @@
 body {
-	background: #e4e4e4 url(../images/paper.jpg);
+	background: #737373 url(../images/inverted_paper.jpg);
 	padding: 0;
 	margin: 0;
 	font-family: "Myriad Pro", Helvetica, Verdana, sans-serif;
@@ -11,10 +11,19 @@ body {
 }
 
 #main {
+	background: #e4e4e4 url(../images/paper.jpg);
 	width: 610px;
+	padding: 20px 100px;
 	margin: 7em auto;
 	text-align: left;
 	text-align: right;
+
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	-webkit-box-shadow: 2px 3px 25px #222;
+	-moz-box-shadow: 2px 3px 25px #222;
+	box-shadow: 1px 2px 8px #000;
 }
 
 h1 {

@@ -12,6 +12,7 @@ body {
 
 #main {
 	background: #e4e4e4 url(../images/paper.jpg);
+	overflow: hidden;
 	width: 610px;
 	padding: 20px 100px;
 	margin: 7em auto;
@@ -88,7 +89,8 @@ blockquote .by {
 	text-align: right;
 }
 
-ul {
+ul.social {
+	float: right;
 	padding-left: 0;
 	list-style: none;
 }

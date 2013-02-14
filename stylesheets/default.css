@@ -11,9 +11,10 @@ body {
 }
 
 #main {
-	background: #e4e4e4 url(../images/paper.jpg);
+	position: relative;
+	background: #ddd url(../images/watercolor_paper.jpg);
 	overflow: hidden;
-	width: 610px;
+	width: 810px;
 	padding: 20px 100px;
 	margin: 7em auto;
 	text-align: left;
@@ -30,17 +31,21 @@ body {
 h1 {
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	color: #333;
+	color: #383838;
+	text-shadow: 0 -2px 0 #000, 1px 2px 0 #fff;
+	font-size: 70px;
+	opacity: 0.85;
 }
 
 h2 {
-	color: #aaa;
-	opacity: 0.6;
+	color: #626262;
+	opacity: 0.83;
 }
 
 a {
-	color: #58f;
+	color: #48c;
 	text-decoration: none;
+	opacity: 0.94;
 }
 
 a img {
@@ -58,21 +63,21 @@ blockquote {
 	margin: 1.5em 0;
 	padding: 0;
 	font-style: italic;
-	color: #777;
+	color: #464544;
+	opacity: 0.9;
 }
 
 blockquote .quote {
 	position: absolute;
-	top: -0.2em;
-	left: -0.2em;
+	top: -0.25em;
+	left: -0.25em;
 	width: 1em;
 	text-align: left;
-	color: #89a;
+	color: rgba(47, 54, 63, 0.2);
 	font-family: arial, sans-serif;
 	font-size: 14em;
 	line-height: 1em;
-	opacity: 0.3;
-	filter: alpha(opacity=30);
+	text-shadow: none;
 }
 
 blockquote p {
@@ -99,13 +104,16 @@ ul li a {
 	display: block;
 }
 
+ul li a strong {
+	margin-left: 1px;
+}
+
 ul li a img {
 	position: relative;
-	top: 1px;
-	left: -1px;
+	top: 2px;
 	opacity: 0.3;
 }
 
 ul li a:hover img {
-	opacity: 0.7;
+	opacity: 0.8;
 }

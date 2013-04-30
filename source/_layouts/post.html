@@ -19,6 +19,13 @@
 <body>
 	<div id="main">
 		{{ content }}
+
+		<p class="meta">
+			Публикувано на {{ page.date | date: "%d.%m.%Y" }} г.<br />
+			<a href="/">←</a>
+		</p>
+		<p class="navigation">
+		</p>
 	</div>
 </body>
 </html>

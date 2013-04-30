@@ -48,3 +48,20 @@ blockquote {
 ul, ol {
 	padding-left: 2em;
 }
+
+.meta {
+	margin: 2em 0;
+	font-size: 0.7em;
+	color: #aaa;
+	text-align: center;
+}
+
+.meta a {
+	font-size: 1.8em;
+	font-family: arial, verdana, sans-serif;
+}
+
+a {
+	color: #356ba3;
+	text-decoration: none;
+}

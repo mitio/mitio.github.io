@@ -1,1 +1,1 @@
-Home of [http://ddimitrov.name/](ddimitrov.name).
+Home of [http://ddimitrov.name/](http://ddimitrov.name/).

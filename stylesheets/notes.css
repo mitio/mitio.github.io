@@ -1,0 +1,50 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 15pt;
+	line-height: 1.5em;
+	font-family: "Alegreya",Palatino,Georgia,serif;
+	color: #444;
+	text-align: center;
+	background-color: #fff;
+}
+
+#main {
+	text-align: left;
+	padding: .809em;
+	max-width: 33em;
+	margin: auto;
+}
+
+#main img {
+	max-width: 100%;
+}
+
+h1 {
+	font-weight: normal;
+	font-size: 2em;
+}
+
+h2, h3 {
+	color: #222;
+	font-weight: normal;
+	margin-top: 1.5em;
+}
+
+h4 {
+	font-size: 1.1em;
+	font-style: italic;
+	font-weight: normal;
+	color: #222;
+}
+
+blockquote {
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 1em;
+	border-left: 1px solid #aaa;
+}
+
+ul, ol {
+	padding-left: 2em;
+}

@@ -3,7 +3,7 @@ layout: post
 title: Was passiert in Bulgarien?
 ---
 
--> ![NOresharski - Slogan Against Corrupt Coverment And Prime Minister in Bulgaria - #ДАНСwithme](../../../images/2013-06-20-was-passiert-in-bulgarien/noresharski.png) <-
+-> <img src="../../../images/2013-06-20-was-passiert-in-bulgarien/noresharski.png" alt="NOresharski - Slogan Against Corrupt Coverment And Prime Minister in Bulgaria - #ДАНСwithme" style="width: 528px; height: 307px;" /> <-
 
 _Der Originaltext dieses Artikels wurde von Georgi Marinov geschrieben und erschien am 19.06.2013 zum ersten Mal [hier](https://medium.com/better-humans/d289c6e1392). Das ist nur eine Übersetzung, die das Ziel hat, auch für die deutschsprachigen Leser ein bisschen mehr Klarheit über die jüngsten Ereignisse in Bulgarien zu schaffen. Dieser Text wurde ins Deutsche von Andrey Atanasov, Anna Artinyan und Yana Shaterova übersetzt._
 

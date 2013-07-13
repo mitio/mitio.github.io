@@ -3,6 +3,8 @@ layout: post
 title: '"Не ме интересува" ще ви струва скъпо'
 ---
 
+-> <img src="../../../images/2013-06-20-was-passiert-in-bulgarien/noresharski.png" alt="NOresharski - Slogan Against Corrupt Coverment And Prime Minister in Bulgaria - #ДАНСwithme" style="width: 400px; height: 233px;" /> <-
+
 # _"Не ме интересува"_ струва скъпо
 
 За мен доводите на повечето непротестиращи се свеждат до тези три думи.

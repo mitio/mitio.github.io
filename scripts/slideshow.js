@@ -16,8 +16,8 @@
 		setInterval(function () {
 			var previousFrame = currentFrame;
 			currentFrame = (currentFrame + 1) % framesCount;
-			images[currentFrame].style.visibility = 'visible';
-			images[previousFrame].style.visibility = 'hidden';
+			images[currentFrame].style.display = 'block';
+			images[previousFrame].style.display = 'none';
 		}, frameDuration);
 	}
 })();

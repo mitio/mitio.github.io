@@ -73,3 +73,19 @@ a {
 	color: #356ba3;
 	text-decoration: none;
 }
+
+.slideshow.active {
+	position: relative;
+}
+
+.slideshow.active img {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.slideshow.active img:first-child {
+	visibility: visible;
+}
+

@@ -35,7 +35,7 @@ title: 'Спекулации и подвеждане'
 
 ---
 
-<em>Извадените кадри, показани един по един. Може да кликнете върху кадър, за да го видите в по-голям размер:</em>
+<em>Извадените кадри, показани един по един. Може да кликнете върху кадър, за да го видите в по-голям размер. Цялата анимация, която се върти над заглавието, може да [изтеглите в .GIF от тук](../../../images/2013-07-28-danswithme-broken-window/danswithme-broken-window-speculation.gif).</em>
 
 <a href="../../../images/2013-07-28-danswithme-broken-window/image-1.jpeg" title="Вижте кадър 1 в по-голям размер">
 	<img src="../../../images/2013-07-28-danswithme-broken-window/image-1-small.jpeg" alt="Frame 1" />

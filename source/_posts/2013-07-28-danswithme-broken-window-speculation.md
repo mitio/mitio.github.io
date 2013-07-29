@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Спекулации и подвеждане'
+slideshow: true
 ---
 
 <div id="images" class="slideshow" data-frame-duration="200" style="margin: 0 0 40px 0;">

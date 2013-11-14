@@ -3,7 +3,7 @@ layout: post
 title: Бавната победа
 ---
 
--> <img src="../../../images/2013-11-14-the-slow-win/ranobudnite-studenti.jpg" alt="Ранобудните студенти" style="width: 400px; height: 336px;" /> <-
+-> <img src="../../../images/2013-11-14-the-slow-win/ranobudnite-studenti.jpg" alt="Ранобудните студенти" style="width: 400px; height: 280px;" /> <-
 
 # Бавната победа
 

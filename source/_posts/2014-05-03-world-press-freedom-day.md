@@ -1,6 +1,8 @@
 ---
 layout: post
 title: World Press Freedom Day
+image: ../../../images/sardar-ahmad.jpg
+description: Световен ден на свободата на печата, напомнящ острата нужда от безпристрастни и независими медии.
 ---
 
 <a href="http://www.nytimes.com/2014/03/27/world/asia/killing-of-afghan-journalist-and-family-members-stuns-media-peers.html">

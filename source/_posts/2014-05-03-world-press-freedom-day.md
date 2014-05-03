@@ -1,7 +1,7 @@
 ---
 layout: post
 title: World Press Freedom Day
-image: ../../../images/sardar-ahmad.jpg
+image: http://ddimitrov.name/notes/images/sardar-ahmad.jpg
 description: Световен ден на свободата на печата, напомнящ острата нужда от безпристрастни и независими медии.
 ---
 

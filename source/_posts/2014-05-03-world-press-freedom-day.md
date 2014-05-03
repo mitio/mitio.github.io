@@ -8,7 +8,7 @@ description: Световен ден на свободата на печата, 
 <a href="http://www.nytimes.com/2014/03/27/world/asia/killing-of-afghan-journalist-and-family-members-stuns-media-peers.html">
     <img src="../../../images/sardar-ahmad.jpg" alt="Sardar Ahmad" width="660" height="371" />
 </a>
-<small>_Сардар Ахмад, жертва на нападение над хотел в Кабул на 20 март 2014 г. Снимка: Wakil Kohsar/AFP/Getty Images_</small>
+<small>_Сардар Ахмад, загинал при нападение над хотела му в Кабул на 20 март 2014 г. Снимка: Wakil Kohsar/AFP/Getty Images_</small>
 
 # World Press Freedom Day
 

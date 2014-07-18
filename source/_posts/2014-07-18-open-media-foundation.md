@@ -2,7 +2,7 @@
 layout: post
 title: Фондация "Отворени медии"
 image: http://ddimitrov.name/notes/images/open-media-foundation-logo.png
-description: С фондация "Отворени медии" ще работим по проекти, свързани с медийната независимост, качествената журналистика и добрата медийна култура.
+description: Фондацията ще реализира проекти, свързани с медийната независимост, качествената журналистика и добрата медийна култура.
 ---
 
 <a href="http://openmedia.bg/" style="display: block; text-align: center;">

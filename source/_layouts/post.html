@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{ page.title }} — Dimitar Dimitrov's Notes</title>
+	<title>{{ page.title | xml_escape }} — Dimitar Dimitrov's Notes</title>
 	<link rel="stylesheet" type="text/css" href="../../../../stylesheets/notes.css">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ page.title }}" />
-	{% if page.image %}<meta property="og:image" content="{{ page.image }}" />{% endif %}
-	{% if page.description %}<meta property="og:description" content="{{ page.description }}" />{% endif %}
+	<meta property="og:title" content="{{ page.title | xml_escape }}" />
+	{% if page.image %}<meta property="og:image" content="{{ page.image | xml_escape }}" />{% endif %}
+	{% if page.description %}<meta property="og:description" content="{{ page.description | xml_escape }}" />{% endif %}
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-28197881-1']);

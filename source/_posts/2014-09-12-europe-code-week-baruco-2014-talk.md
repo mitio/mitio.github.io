@@ -30,7 +30,7 @@ Okay, let's say you want to get involved. What can you do? At least one of 3 thi
 
 You can start by contacting your local [Code Week ambassador](http://events.codeweek.eu/ambassadors/). Each country has at least one. They're the people responsible for encouraging local events to happen and should be in the loop of what's being planned.
 
-You can find this talk and some links at bit.ly/barucocodeweek. Or you can just Google it.
+You can find this talk and some links at http://bit.ly/codeweekbaruco. Or you can just Google it.
 
 You know, if opportunity presents itself, I'd probably join an effort to engineer a virus with the purpose of automating the spreading of the passion to code and create. Sadly, no such opportunity has presented itself—yet—so currently I strongly believe that we need to make a constant effort in helping other people see how great and powerful coding skills are.
 

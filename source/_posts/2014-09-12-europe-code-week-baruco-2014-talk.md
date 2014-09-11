@@ -6,7 +6,9 @@ description: A lightning talk (5 min) I have on the Baruco 2014 conference about
 
 # Europe Code Week 2014
 
-By coming up on this stage, I'm making the assumption that there is a fair amount of people in the audience who like coding and who believe that to be able to code is a very valuable skill. I know for sure that some of you are really passionate about sharing what you know with others. I really like programming communities, and the Ruby community in particular, in that we're pretty open and friendly to newcomers and pretty eager to share our passions and knowledge with them. I've learned a lot this way and I think that's what keeps us moving forward with great speed.
+By coming up on this stage, I'm making the assumption that there is a fair amount of people in the audience who like coding and who believe that to be able to code is a very valuable skill. I know for sure that some of you are really passionate about sharing what you know with others.
+
+I really like programming communities, and especially the Ruby community in particular, because we're pretty open and friendly to newcomers and pretty eager to share our passions and knowledge with them. I personally have learned a great deal this way and I think that openness is what keeps us moving forward with great speed.
 
 If you agree with me, then I think you'd be interested to get involved in the upcoming [Europe Code Week](http://codeweek.eu/).
 

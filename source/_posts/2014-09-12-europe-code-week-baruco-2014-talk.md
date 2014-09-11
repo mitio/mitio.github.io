@@ -47,4 +47,4 @@ So let's get to work. Thank you.
 3. [Events in your country](http://events.codeweek.eu/)
 4. [Ambassadors from your country to get in touch with](http://events.codeweek.eu/ambassadors/)
 
-You can always [talk to me as well](me@ddimitrov.name).
+You can always [talk to me as well](mailto:me@ddimitrov.name).

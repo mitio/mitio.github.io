@@ -14,7 +14,7 @@ If you agree with me, then I think you'd be interested to get involved in the up
 
 Europe Code Week is an initiative launched for the first time last year by the Young Advisors of Neelie Kroes with some help from the [European Commission](http://ec.europa.eu/dgs/connect/en/content/dg-connect). This year's edition will be the second one. It will take place from the 11th to the 17th of October.
 
-It's purpose is to spread the idea of coding, how great and powerful it is and about connecting people who are willing to teach, with whose who are eager to learn.
+It's purpose is to get more people interested in coding by showing them that it's fun and powerful and by connecting thowse who are willing to teach with whose who are eager to learn.
 
 So here is how it's going to work.
 
@@ -22,13 +22,13 @@ People from all around Europe are encouraged to organize local coding events and
 
 The events are independent from each other and anyone can organize an event as a part of Code Week—including you. Up until now, there are already over 400 events participating in Code Week, from all across Europe, including ones from countries like Turkey and Moldova.
 
-There are not much requirements for the events. It's preferred that the event is as beginner friendly as possible and accessible even to those with little or no previous programming experience. The target audience are people from all ages, especially students and children. The size, the format, the tools and technologies used in the events are all up to you.
+There are no requirements for the events, just recommendations. It's preferred that the event is as beginner friendly as possible and accessible even to those with little or no previous programming experience. The target audience are people from all ages, especially students and children. The size, the format, the tools and technologies used in the events are all up to you.
 
 Actually, any event, in any format, which will open the doors to coding to more people will do.
 
 Okay, let's say you want to get involved. What can you do? At least one of three things:
 
-- Firstly, you can look for [existing events in your country](http://events.codeweek.eu/), get involved and help out there.
+- Firstly, you can look for [existing events in your country](http://events.codeweek.eu/)—get involved and help out there.
 - Secondly, you can organize your own event. It's not that hard and it's extremely fun and rewarding, I assure you. Also, there is a [great guide on how to organize your first event](http://events.codeweek.eu/guide/) on the Code Week website.
 - Thirdly, you can help with online stuff, like gathering beginner-friendly programming resources in your country's native language or just spreading the word about local coding events or about the Code Week initiative as a whole.
 

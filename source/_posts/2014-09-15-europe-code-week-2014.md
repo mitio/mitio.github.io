@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Europe Code Week 2014
-description: Организирайте събитие за програмиране по време на Europe Code Week 2014 (11-17 октомври) и събудете интерес към програмирането у повече хора.
-image: ../../../images/europe-code-week-logo.png
+description: Организирайте събитие за програмиране по време на Europe Code Week 2014 (11-17 октомври) и събудете интерес към програмирането у повече хора. Добавете още към над 400-те съществуващи събития.
+image: http://ddimitrov.name/notes/images/europe-code-week-logo.png
 ---
 
 <a href="http://codeweek.eu/" style="display: block; text-align: center;">

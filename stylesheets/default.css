@@ -41,6 +41,15 @@ h2 {
 	font-size: 3em;
 }
 
+h3 {
+	color: #626262;
+	opacity: 0.83;
+	font-size: 2.7em;
+	font-weight: 200;
+	margin: 1.4em 0 0.5em 0;
+	padding: 0;
+}
+
 a {
 	color: #48c;
 	text-decoration: none;
@@ -91,16 +100,21 @@ blockquote .by {
 	font-style: normal;
 }
 
-ul.social {
-	float: right;
+ul.links {
+	display: block;
 	padding-left: 0;
 	list-style: none;
 	font-size: 2em;
 	line-height: 1.4em;
+	margin: 0;
+}
+
+ul li {
+	color: #888;
 }
 
 ul li a {
-	display: block;
+	display: inline-block;
 }
 
 ul li a strong {
@@ -132,8 +146,7 @@ ul li a:hover img {
 		text-align: left;
 	}
 
-	ul.social {
-		float: left;
+	ul.links {
 		text-align: left;
 	}
 }

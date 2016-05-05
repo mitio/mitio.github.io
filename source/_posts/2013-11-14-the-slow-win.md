@@ -3,7 +3,9 @@ layout: post
 title: Бавната победа на протеста
 ---
 
--> <img src="../../../images/2013-11-14-the-slow-win/ranobudnite-studenti.jpg" alt="Ранобудните студенти" style="width: 400px; height: 280px;" /> <-
+<div style="text-align: center;">
+	<img src="../../../images/2013-11-14-the-slow-win/ranobudnite-studenti.jpg" alt="Ранобудните студенти" style="width: 400px; height: 280px;" />
+</div>
 
 # Бавната победа на протеста
 

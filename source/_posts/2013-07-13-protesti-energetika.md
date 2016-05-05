@@ -3,7 +3,9 @@ layout: post
 title: '"Не ме интересува" ще ви струва скъпо'
 ---
 
--> <img src="../../../images/2013-06-20-was-passiert-in-bulgarien/noresharski.png" alt="NOresharski - Slogan Against Corrupt Coverment And Prime Minister in Bulgaria - #ДАНСwithme" style="width: 400px; height: 233px;" /> <-
+<div style="display: block; text-align: center;">
+	<img src="../../../images/2013-06-20-was-passiert-in-bulgarien/noresharski.png" alt="NOresharski - Slogan Against Corrupt Coverment And Prime Minister in Bulgaria - #ДАНСwithme" style="width: 400px; height: 233px;" />
+</div>
 
 # _"Не ме интересува"_ струва скъпо
 

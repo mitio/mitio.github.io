@@ -3,7 +3,9 @@ layout: post
 title: Rails Girls Study групи
 ---
 
--> <a href="http://railsgirls.com/sofia"><img src="../../../images/rails-girls.jpg" alt="Rails Girls Sofia" width="200" height="178" /></a> <-
+<a href="http://railsgirls.com/sofia" style="display: block; text-align: center;">
+	<img src="../../../images/rails-girls.jpg" alt="Rails Girls Sofia" width="200" height="178" />
+</a>
 
 # Rails Girls Study групи
 

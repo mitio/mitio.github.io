@@ -1,0 +1,152 @@
+html { font-size: 10px; }
+@media (max-width: 1920px) { html { font-size: 14px; } }
+@media (max-width: 1680px) { html { font-size: 13px; } }
+@media (max-width: 1440px) { html { font-size: 12px; } }
+@media (max-width: 1280px) { html { font-size: 11px; } }
+@media (max-width: 900px)  { html { font-size: 10px; } }
+
+body {
+	background: #e8e8e8 url(../images/textured_paper.jpg);
+	padding: 0;
+	margin: 0;
+	font-family: "Myriad Pro", Helvetica, Verdana, sans-serif;
+	text-align: center;
+	color: #555;
+	text-shadow: 0 1px 0 #fff;
+}
+
+#main {
+	position: relative;
+	overflow: hidden;
+	max-width: 810px;
+	padding: 2% 7%;
+	margin: 4% auto;
+	text-align: left;
+	text-align: right;
+}
+
+h1 {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #383838;
+	text-shadow: 0 -2px 0 #000, 1px 2px 0 #fff;
+	font-size: 7em;
+	opacity: 0.85;
+	line-height: 1.1em;
+}
+
+h2 {
+	color: #626262;
+	opacity: 0.83;
+	font-size: 3em;
+}
+
+h3 {
+	color: #626262;
+	opacity: 0.83;
+	font-size: 2.7em;
+	font-weight: 200;
+	margin: 1.4em 0 0.5em 0;
+	padding: 0;
+}
+
+a {
+	color: #48c;
+	text-decoration: none;
+	opacity: 0.94;
+}
+
+a img {
+	border-width: 0;
+}
+
+a strong {
+	letter-spacing: 1px;
+	color: #567;
+	font-weight: normal;
+}
+
+blockquote {
+	position: relative;
+	margin: 1.5em 0;
+	padding: 0;
+	font-size: 2em;
+	font-style: italic;
+	line-height: 1.5em;
+	color: #464544;
+	opacity: 0.9;
+}
+
+blockquote .quote {
+	position: absolute;
+	top: -0.25em;
+	left: -0.25em;
+	width: 1em;
+	text-align: left;
+	color: rgba(47, 54, 63, 0.2);
+	font-family: arial, sans-serif;
+	font-size: 14em;
+	line-height: 1em;
+	text-shadow: none;
+}
+
+blockquote p {
+	position: relative;
+	margin: 0.5em 0;
+}
+
+blockquote .by {
+	text-align: right;
+	font-style: normal;
+}
+
+ul.links {
+	display: block;
+	padding-left: 0;
+	list-style: none;
+	font-size: 2em;
+	line-height: 1.4em;
+	margin: 0;
+}
+
+ul li {
+	color: #888;
+}
+
+ul li a {
+	display: inline-block;
+}
+
+ul li a strong {
+	margin-left: 1px;
+}
+
+ul li a img {
+	position: relative;
+	top: 2px;
+	opacity: 0.3;
+}
+
+ul li a:hover img {
+	opacity: 0.8;
+}
+
+@media (max-width: 800px) {
+	h1 {
+		text-align: center;
+		font-size: 5em;
+	}
+	h2 {
+		text-align: center;
+		font-size: 2em;
+	}
+
+	#main,
+	p {
+		text-align: left;
+	}
+
+	ul.links {
+		text-align: left;
+	}
+}

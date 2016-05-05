@@ -3,7 +3,9 @@ layout: post
 title: Старт на GovFaces
 ---
 
--> <a href="http://www.govfaces.com/"><img src="../../../images/govfaces-logo.png" alt="GovFaces" width="210" height="126" /></a> <-
+<a href="http://www.govfaces.com/" style="display: block; text-align: center;">
+	<img src="../../../images/govfaces-logo.png" alt="GovFaces" width="210" height="126" />
+</a>
 
 # Официален старт на GovFaces в ЕС
 

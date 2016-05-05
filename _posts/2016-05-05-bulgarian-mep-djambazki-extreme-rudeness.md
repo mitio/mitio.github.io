@@ -25,7 +25,7 @@ To help understand the context, we're sharing translated excerpts from the conve
 It all started with [the following exchange](https://twitter.com/djambazki/status/727860887592251392) (English translation below):
 
 <a href="https://twitter.com/djambazki/status/727860887592251392">
-![Djambazki rude Twitter conversation](../../../images/djambazki/djambazki-twitter-1.png)
+![MEP Angel Dzhambazki rude Twitter conversation part 2](../../../images/djambazki/djambazki-twitter-1.png)
 </a>
 
 The above conversation roughly translates to the following:
@@ -54,7 +54,9 @@ The above conversation roughly translates to the following:
 >
 > > _@xoptrop @shoilev @mstefanov I'm saying stop annoying me and bothering me with your problems. I can neither solve them, nor help you._
 
-The [conversation continues](../../../images/djambazki/djambazki-twitter-2.png) and Dzhambazki's replies quickly escalate in tone and he starts to be extremely rude:
+The conversation continues and Dzhambazki's replies quickly escalate in tone and he starts to be extremely rude:
+
+![MEP Angel Dzhambazki rude Twitter conversation part 2](../../../images/djambazki/djambazki-twitter-2.png)
 
 > [**MEP @djambazki**](https://twitter.com/djambazki/status/727880513898332160):
 >

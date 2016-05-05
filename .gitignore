@@ -1,2 +1,5 @@
 .bundle
 papers/
+/_site/Gemfile*
+/_site/README.md
+/_site/artwork/

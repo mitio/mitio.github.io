@@ -72,7 +72,7 @@ The conversation continues and Dzhambazki's replies quickly escalate in tone and
 >
 > > _@Ishki @xoptrop @shoilev @mstefanov you probably pay for male companionship, you incapable one_
 >
-> (MEP Dzhambazki used "неможач" in his tweet which translates roughly to "someone who's incapable".)
+> (MEP Dzhambazki used "неможач" in his tweet which is not an actual word but would roughly translate to "someone who's incapable".)
 >
 > MEP Dzhambazki continues:
 >

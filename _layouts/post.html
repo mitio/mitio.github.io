@@ -26,7 +26,7 @@
 		{{ content }}
 
 		<p class="meta">
-			Публикувано на {{ page.date | date: "%d.%m.%Y" }} г.<br />
+			{% if page.language == "en" %}Published on{% else %}Публикувано на{% endif %} {{ page.date | date: "%d.%m.%Y" }} {% if page.language != "en" %}г.{% endif %}<br />
 			<a href="/">←</a>
 		</p>
 		<p class="navigation">

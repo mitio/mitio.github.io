@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MEP Angel Dzhambazki extremely rude on Twitter
-description: Bulgarian MEP Angel Dzhambazki from the European Conservatives and Reformists group engaged some Bulgarians in conversation on Twitter and was extremely rude, disrespectful and inpolite in a series of tweets on May 4th.
+description: Bulgarian MEP Angel Dzhambazki from the European Conservatives and Reformists group got involved in a conversation with some Bulgarians on Twitter and was extremely rude, disrespectful and impolite in a series of tweets on May 4th.
 image: http://ddimitrov.name/notes/images/djambazki/djambazki-rudeness-tweet.png
 language: en
 ---

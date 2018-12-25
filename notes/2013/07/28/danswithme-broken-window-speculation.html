@@ -39,7 +39,7 @@
 	<img src="../../../images/2013-07-28-danswithme-broken-window/image-13-small.jpeg" alt="Frame 13" />
 </div>
 
-<h1 id="section">Спекулации и подвеждане</h1>
+<h1 id="спекулации-и-подвеждане">Спекулации и подвеждане</h1>
 
 <p>Един <a href="http://www.youtube.com/watch?v=tAjD7ow7bPQ">видеоклип с кадри от сблъсъците от нощта на 23 юли</a> набра популярност вчера, споделен от много хора. В клипа се твърди, че пътуващите в белия автобус служители на МВР чупят прозорец отвътре, а впоследствие вината за счупването отнасяме ние, протестиращите.</p>
 
@@ -101,11 +101,10 @@
 
 <p><em>За тези, които се интересуват как съм извадил кадрите - свалих оригиналния видеоклип от YouTube в най-качествения му вариант и обърнах няколко секунди от клипа в картинки със следната команда:</em></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ffmpeg -i danswithme_broken_window.mp4 \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i danswithme_broken_window.mp4 \
 	-r 30 -f image2 -s hd1080 -ss 00:02:35 \
 	-t 5 -qmin 1 -qmax 1 image-%3d.jpeg
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
 		<p class="meta">

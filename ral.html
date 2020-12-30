@@ -227,7 +227,7 @@ function showRal() {
 	if (ralCode && colors[ralCode]) {
 		document.body.style.backgroundColor = colors[ralCode].hex;
 		document.body.innerText = colors[ralCode].name;
-		window.title = colors[ralCode].name;
+		document.title = colors[ralCode].name;
 	}
 }
 showRal();

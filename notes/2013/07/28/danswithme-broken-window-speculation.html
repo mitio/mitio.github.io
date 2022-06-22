@@ -101,7 +101,7 @@
 
 <p><em>За тези, които се интересуват как съм извадил кадрите - свалих оригиналния видеоклип от YouTube в най-качествения му вариант и обърнах няколко секунди от клипа в картинки със следната команда:</em></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i danswithme_broken_window.mp4 \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg -i danswithme_broken_window.mp4 \
 	-r 30 -f image2 -s hd1080 -ss 00:02:35 \
 	-t 5 -qmin 1 -qmax 1 image-%3d.jpeg
 </code></pre></div></div>

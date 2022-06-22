@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Good strategy, bad strategy
-description: Notes based on the book by Richard Rumelt, "Good Strategy Bad Strategy: The Difference and Why It Matters"
+description: 'Notes based on the book by Richard Rumelt, "Good Strategy Bad Strategy: The Difference and Why It Matters"'
 image: https://ddimitrov.name/notes/images/good-strategy-bad-strategy.jpg
 language: en
 ---
@@ -10,7 +10,7 @@ language: en
 
 *These are my notes on the book "[Good Strategy Bad Strategy: The Difference and Why It Matters](https://www.amazon.com/Good-Strategy-Bad-Difference-Matters/dp/0307886239)" by Richard Rumelt, published in 2011. I listened to it as an audiobook in 2022. The notes below are my key takeaways and a way to remember the essence of Rumelt's great advice. Thanks to [Stefan Kanev](https://skanev.com/) for recommending this to me.*
 
-[[toc]]
+{:toc}
 
 ## Bad strategy
 

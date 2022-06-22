@@ -8,7 +8,7 @@ language: en
 
 # Good strategy, bad strategy
 
-*These are my notes on the book "[Good Strategy Bad Strategy: The Difference and Why It Matters](https://www.amazon.com/Good-Strategy-Bad-Difference-Matters/dp/0307886239)" by Richard Rumelt, published in 2011. I listened to it as an audiobook in 2022. The notes below are my key takeaways and a way to remember the essence of Rumelt's great advice. Thanks to [Stefan Kanev](https://skanev.com/) for recommending this to me.*
+*These are my notes on the book "[Good Strategy Bad Strategy: The Difference and Why It Matters](https://www.amazon.com/Good-Strategy-Bad-Difference-Matters/dp/0307886239)" by Richard Rumelt, published in 2011. I listened to it as an audiobook in 2022. The notes below are my key takeaways and a way to remember the essence of Rumelt's great advice. Note that my summary doesn't do the book justice, as it omits the many examples, interesting and insightful stories and detail that Rumelt shares with us. Thanks to [Stefan Kanev](https://skanev.com/) for recommending the book to me.*
 
 1. [Bad strategy](#bad-strategy)
 2. [Good strategy](#good-strategy)

@@ -10,7 +10,17 @@ language: en
 
 *These are my notes on the book "[Good Strategy Bad Strategy: The Difference and Why It Matters](https://www.amazon.com/Good-Strategy-Bad-Difference-Matters/dp/0307886239)" by Richard Rumelt, published in 2011. I listened to it as an audiobook in 2022. The notes below are my key takeaways and a way to remember the essence of Rumelt's great advice. Thanks to [Stefan Kanev](https://skanev.com/) for recommending this to me.*
 
-{:toc}
+1. [Bad strategy](#bad-strategy)
+2. [Good strategy](#good-strategy)
+3. [The core of a good strategy](#the-core-of-a-good-strategy)
+   1. [Diagnosis – clearly state the problem, challenge, obstacle](#1-diagnosis--clearly-state-the-problem-challenge-obstacle)
+   2. [Guiding policy – provide a direction for the solution](#2-guiding-policy--provide-a-direction-for-the-solution)
+   3. [Coherent actions to carry out the policy](#3-coherent-actions-to-carry-out-the-policy)
+4. [Amplify your efforts with various "sources of power"](#amplify-your-efforts-with-various-sources-of-power)
+5. [Thinking like a strategist](#thinking-like-a-strategist)
+   1. [Form independent judgement](#form-independent-judgement)
+   2. [The science of strategy](#the-science-of-strategy)
+   3. [Think about your thinking – reflect and improve](#think-about-your-thinking--reflect-and-improve)
 
 ## Bad strategy
 

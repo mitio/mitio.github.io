@@ -181,7 +181,7 @@ Make sure to **periodically take a step back**, to reevaluate your goals and pur
 
 **On gut feeling and quick judgements**:
 
-> Our instincts can often produce amazingly good judgements, but our instincts also tell us - **incorrectly** - that our instincts are always right; [...] **recognise which situations require deeper reflection**. Quick judgements may work well for people situations and certain kinds of pattern matching [...]
+> _Our instincts can often produce amazingly good judgements, but our instincts also tell us - **incorrectly** - that our instincts are always right; [...] **recognise which situations require deeper reflection**. Quick judgements may work well for people situations and certain kinds of pattern matching [...]_
 
 ...but there are a lot more situations where they don't.
 

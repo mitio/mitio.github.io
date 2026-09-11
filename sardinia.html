@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alghero, 19–24 September — places, bikes, cars</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root{
+    --deep:#0b2a32;
+    --panel:#13404c;
+    --panel-2:#17505e;
+    --line:rgba(221,211,189,.22);
+    --paper:#eef0e9;
+    --muted:#a9c0c4;
+    --sand:#ddd3bd;
+    --coral:#e8594d;
+    --sun:#f2b452;
+    --lagoon:#57c4cf;
+    --pine:#7fb490;
+    --slate:#a9bdd0;
+    --serif: Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--deep);
+    color:var(--paper);
+    font-family:var(--sans);
+    font-size:16.5px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .col{max-width:660px}
+
+  header{padding:56px 0 28px}
+  .kicker{font-family:var(--serif);font-style:italic;color:var(--sand);font-size:1.05rem;margin:0 0 6px}
+  h1{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.4rem,6vw,4rem);
+    line-height:1.02;
+    margin:0 0 18px;
+    letter-spacing:-.01em;
+  }
+  h1 em{font-style:italic;color:var(--sand)}
+  .lede{font-size:1.12rem;color:#dbe6e4;max-width:640px}
+
+  h2{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:1.9rem;
+    line-height:1.15;
+    margin:0 0 14px;
+    padding-top:8px;
+  }
+  h3{font-size:1.02rem;margin:0 0 6px;font-weight:650;letter-spacing:.005em}
+  p{margin:0 0 16px}
+  section{padding:44px 0;border-top:1px solid var(--line)}
+  .note{color:var(--muted);font-size:.92rem}
+
+  a{color:var(--sand)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--sun);outline-offset:2px;border-radius:3px}
+
+  /* in-text place links */
+  .jump{
+    color:var(--paper);
+    text-decoration:none;
+    border-bottom:2px solid rgba(232,89,77,.75);
+    cursor:pointer;
+    padding-bottom:1px;
+    background:none;border:0;border-bottom:2px solid rgba(232,89,77,.75);
+    font:inherit;
+  }
+  .jump:hover{background:rgba(232,89,77,.16)}
+
+  /* ---- map ---- */
+  .mapshell{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .maptools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .chip{
+    font:inherit;font-size:.83rem;
+    background:transparent;color:var(--paper);
+    border:1px solid var(--line);border-radius:999px;
+    padding:5px 12px 5px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+  }
+  .chip .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:0 0 auto}
+  .chip[aria-pressed="false"]{opacity:.4}
+  .chip:hover{background:rgba(255,255,255,.06)}
+  .views{margin-left:auto;display:flex;gap:6px}
+  .views button{
+    font:inherit;font-size:.83rem;background:rgba(255,255,255,.06);color:var(--paper);
+    border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer;
+  }
+  .views button:hover{background:rgba(255,255,255,.14)}
+  .views button[aria-pressed="true"]{background:rgba(242,180,82,.22);border-color:rgba(242,180,82,.6)}
+  .views button[aria-pressed="false"]{opacity:.55}
+  #map{height:min(72vh,620px);width:100%;background:#0f3540}
+  .maphint{padding:9px 14px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}
+
+  .mapshell.full{
+    position:fixed;inset:0;z-index:500;border-radius:0;border:0;
+    display:flex;flex-direction:column;
+  }
+  .mapshell.full #map,.mapshell.full #fallback{height:auto;flex:1;min-height:0}
+  body.mapfull{overflow:hidden}
+
+  .pin{
+    width:16px;height:16px;border-radius:50%;
+    border:2.5px solid rgba(8,32,38,.9);
+    box-shadow:0 0 0 1.5px rgba(255,255,255,.35);
+  }
+  .leaflet-container{font-family:var(--sans)}
+  .leaflet-tooltip{
+    background:#0b2a32;color:#eef0e9;border:1px solid rgba(221,211,189,.35);
+    box-shadow:none;font-size:.82rem;padding:3px 7px;
+  }
+  .leaflet-tooltip-left:before{border-left-color:rgba(221,211,189,.35)}
+  .leaflet-tooltip-right:before{border-right-color:rgba(221,211,189,.35)}
+
+  /* fallback scatter map */
+  #fallback{display:none;position:relative;height:min(72vh,620px);background:
+    radial-gradient(120% 90% at 20% 10%, #16505d 0%, #0d3441 55%, #092832 100%);}
+  #fallback button{
+    position:absolute;transform:translate(-50%,-50%);
+    width:18px;height:18px;border-radius:50%;padding:0;cursor:pointer;
+    border:2.5px solid rgba(8,32,38,.9);box-shadow:0 0 0 1.5px rgba(255,255,255,.35);
+  }
+  #fallback .fbnote{
+    position:absolute;left:14px;bottom:12px;right:14px;font-size:.82rem;color:var(--muted);
+  }
+
+  /* ---- detail dialog ---- */
+  .scrim{
+    position:fixed;inset:0;background:rgba(4,18,22,.72);
+    display:none;align-items:center;justify-content:center;padding:18px;z-index:9999;
+  }
+  .scrim.open{display:flex}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    max-width:460px;width:100%;max-height:88vh;overflow:auto;
+    box-shadow:0 24px 60px rgba(0,0,0,.5);
+  }
+  .card img{width:100%;height:210px;object-fit:cover;display:block;background:#0f3540}
+  .card .body{padding:18px 20px 20px}
+  .card .cat{font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:7px;margin-bottom:6px}
+  .card .cat .dot{width:9px;height:9px;border-radius:50%}
+  .card h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:0 0 10px;line-height:1.15}
+  .card p{font-size:.97rem}
+  .facts{list-style:none;margin:0 0 16px;padding:0;font-size:.9rem;color:#cfdedc}
+  .facts li{padding:6px 0;border-top:1px solid var(--line);display:flex;gap:10px}
+  .facts li span:first-child{color:var(--muted);flex:0 0 86px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    font:inherit;font-size:.9rem;text-decoration:none;display:inline-block;
+    background:var(--coral);color:#fff;border:0;border-radius:7px;padding:9px 14px;cursor:pointer;
+  }
+  .btn.ghost{background:transparent;color:var(--paper);border:1px solid var(--line)}
+  .credit{font-size:.73rem;color:var(--muted);margin:12px 0 0}
+
+  /* ---- option cards ---- */
+  .opts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:0 0 10px}
+  .opt{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .opt.pick{border-color:rgba(242,180,82,.65)}
+  .opt .tag{font-size:.75rem;color:var(--sun);margin-bottom:8px}
+  .opt p{font-size:.94rem;margin-bottom:10px}
+  .opt ul{margin:0;padding-left:18px;font-size:.9rem;color:#cfdedc}
+  .opt li{margin-bottom:5px}
+
+  .days{border-left:2px solid var(--line);padding-left:20px;margin-left:4px}
+  .day{margin-bottom:26px}
+  .day .when{font-family:var(--serif);font-style:italic;color:var(--sand);margin-bottom:4px}
+
+  .checks{list-style:none;padding:0;margin:0}
+  .checks li{padding:12px 0;border-top:1px solid var(--line);font-size:.97rem}
+  .checks li b{font-weight:650}
+
+  footer{padding:36px 0 60px;color:var(--muted);font-size:.86rem}
+
+  @media (max-width:700px){
+    body{font-size:16px}
+    header{padding:36px 0 20px}
+    .views{margin-left:0;width:100%}
+    .card img{height:170px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Saturday 19 – Thursday 24 September</p>
+    <h1>Alghero and the coast<br><em>you can reach in an hour</em></h1>
+    <p class="lede">Everything below sits inside a small triangle: the old town, a limestone headland full of caves and animals, and one very beautiful road running south. You could do all of it without ever driving more than 45 minutes.</p>
+  </header>
+</div>
+
+<div class="wrap">
+  <div class="mapshell">
+    <div class="maptools" id="chips"></div>
+    <div id="map"></div>
+    <div id="fallback"><div class="fbnote">Map tiles could not load here, so the background is blank — the pins are still in their real positions. Tap one for details and a Google Maps link.</div></div>
+    <p class="maphint">Tap any pin for photos, what it is, and a link that opens it in Google Maps. Underlined names in the text below jump to the pin.</p>
+  </div>
+</div>
+
+<div class="wrap col">
+
+<section>
+  <h2>Getting your bearings</h2>
+  <p><b>Alghero</b> is a walled seaside town of about 45,000 people on the north-west coast. It was Catalan for three centuries, so the old town has Spanish-looking towers, street signs in Catalan, and a paella on most menus. The whole historic centre is maybe fifteen minutes end to end on foot. The <button class="jump" data-id="bastioni">sea walls</button> are the town's living room: a raised stone promenade above the water, lined with bars, facing directly west. That west-facing part matters — the sun sets into the sea in front of you at about 19:25 in late September.</p>
+  <p>The airport is at <button class="jump" data-id="fertilia">Fertilia</button>, 10 km north, a small 1930s planned village with a quiet marina. Between Fertilia and town are the easy family beaches, <button class="jump" data-id="mariapia">Maria Pia</button> first, and a flat cycle path that connects them to the old town.</p>
+  <p>Keep going west and you enter the <b>Porto Conte regional park</b>: a big sheltered bay, pine woods, and a white limestone headland called <button class="jump" data-id="capocaccia">Capo Caccia</button> that drops 200 m straight into the sea. This is the postcard image of the area. Inside the park are the best beaches (<button class="jump" data-id="bombarde">Le Bombarde</button>, <button class="jump" data-id="lazzaretto">Lazzaretto</button>, <button class="jump" data-id="mugoni">Mugoni</button>), a sea cave, a 3,000-year-old stone village, an animal reserve, and two easy clifftop walks. Almost everything I'd suggest doing is in here, within 25 minutes of your hotel.</p>
+  <p>South of town the coast turns wild. One road, the SP105, runs 45 km along empty cliffs to <button class="jump" data-id="bosacastle">Bosa</button>, a river town of coloured houses under a ruined castle. It is the one trip worth leaving the area for.</p>
+</section>
+
+<section>
+  <h2>The headland: caves, animals and cliffs</h2>
+  <p>The <button class="jump" data-id="grotta">Grotta di Nettuno</button> is a sea cave at the foot of Capo Caccia, with a salt lake inside and a lot of stalactites. There are two ways in. By land you drive to the cape, park at La Stalla, take a shuttle, and walk down 654 steps cut into the cliff — spectacular, but the climb back up in the sun is hard work for a seven-year-old, and the land slot must be booked. By sea, a boat leaves from the <button class="jump" data-id="frecce">quay in Alghero</button>, sails under the cliffs past a pierced islet called Foradada, and lands you at the cave mouth. The boat costs about €17 and the cave entry is separate (roughly €14–18 for adults, less for children) — people constantly get caught out by that. I'd take the boat: it's the boat trip and the cave in one morning, and nobody has to climb anything.</p>
+  <p>For the cliffs without the cave, there is a free clifftop viewpoint at the <button class="jump" data-id="capocaccia">end of the Capo Caccia road</button>. It faces west and is one of the better sunsets on the island. Bring a jacket; it's windy up there.</p>
+  <p>The surprise of this trip is likely to be <button class="jump" data-id="prigionette">Le Prigionette</button>, also called Noah's Ark — a former prison farm turned wildlife reserve on the north side of the headland. Albino donkeys from Asinara island, fallow deer, small wild Giara horses, wild boar, and reintroduced griffon vultures riding the updrafts over the cliffs. At the gate there is an information hut, a playground, picnic tables, bike hire, and four-seat electric buggies from about €20 an hour, which you should reserve ahead because they run out. Entry is a couple of euros a head; last admission is well before the 18:00 closing, so go in the morning.</p>
+  <p>Next door, <button class="jump" data-id="puntagiglio">Punta Giglio</button> is a flat headland walk through pines to abandoned World War II gun positions and bunkers, with Capo Caccia filling the view across the bay. Easy underfoot, genuinely exciting if you are seven.</p>
+  <p>And in the middle of all this, right on the main road, sits <button class="jump" data-id="palmavera">Nuraghe Palmavera</button>. Sardinia has around 7,000 <i>nuraghi</i> — dry-stone towers built roughly 1500 BC by a civilisation that left no writing. Palmavera is a tower plus the remains of a whole village of round huts, and you can climb inside it. Half an hour, €7, and it explains the entire island.</p>
+</section>
+
+<section>
+  <h2>Beaches, in plain terms</h2>
+  <p><button class="jump" data-id="mariapia">Maria Pia</button> is the one you can walk or cycle to from town: white sand, pine shade behind, shallow entry. Good for an ordinary afternoon rather than a special outing.</p>
+  <p><button class="jump" data-id="bombarde">Le Bombarde</button> and <button class="jump" data-id="lazzaretto">Lazzaretto</button> are the pretty pair 12 km out, clear turquoise water, parking around €2 an hour, loungers about €20–30 a day in September. Bombarde is bigger, Lazzaretto smaller and more sheltered.</p>
+  <p><button class="jump" data-id="mugoni">Mugoni</button> is my pick with a child: it's inside the bay, so the water is flat and shallow for a long way, and a pine wood grows right down to the sand, which means free shade all afternoon. Walk left from the car park for the quiet stretch.</p>
+  <p>The water is still about 23–24°C in late September and the crowds are gone. Some beach bars start shutting in the last week of the month, so carry water and snacks.</p>
+</section>
+
+<section>
+  <h2>Bosa, and whether it's worth the drive</h2>
+  <p>Yes, mostly for the road. The SP105 hugs the cliffs for 45 km with almost nothing built on it — about 1h15 each way, slow and twisty, and griffon vultures nest along it. At the end, <b>Bosa</b> sits on the Temo, the only navigable river in Sardinia: pastel houses stacked up the hill, a stone bridge, and the ruined <button class="jump" data-id="bosacastle">Malaspina castle</button> on top with a small church inside covered in 14th-century frescoes. Entry is around €5–6.50; the climb up through the old quarter is steep but short.</p>
+  <p>Down at the river mouth, <button class="jump" data-id="bosamarina">Bosa Marina</button> has a long shallow beach, and small boats run short trips up the river from the quay in town. A full day, not a half day.</p>
+  <p>If you'd rather swap it: <b>La Pelosa</b> at Stintino, an hour north, is the famous shallow turquoise beach that looks Caribbean. It needs a paid booking (€3.50 per adult, under-12s free, only through spiaggialapelosa.it) until 15 October, and after 18:00 you can walk in free. It's the better beach; Bosa is the better day.</p>
+</section>
+
+<section>
+  <h2>Wine and very old stones</h2>
+  <p>Ten minutes inland, <button class="jump" data-id="sella">Sella &amp; Mosca</button> is one of the largest single wine estates in Europe, founded in 1899 by two Piedmontese who drained the marsh here. The guided tour walks the old cellars and a small museum, ends with a tasting, and runs Monday to Friday by booking only (visit@sellaemosca.com). Their Vermentino and Torbato are what you'll be drinking all week anyway.</p>
+  <p>While they were planting vines in 1903 they dug up <button class="jump" data-id="anghelu">Anghelu Ruju</button>, the largest prehistoric necropolis in Sardinia: 38 tombs cut into soft rock around 3000 BC, some with carved bull horns. It's a field of holes in the ground you can crawl into, five minutes from the winery, and there's a combined ticket with Nuraghe Palmavera.</p>
+</section>
+
+<section>
+  <h2>The car question</h2>
+  <p>You don't have to decide the way most people do. Rentals here are small local outfits, several of them in the old town, several will deliver the car to your hotel, and short rentals are normal. Four honest options:</p>
+
+  <div class="opts">
+    <div class="opt">
+      <div class="tag">Option A</div>
+      <h3>Airport, on arrival, all five days</h3>
+      <p>Maximum freedom, one queue, and you can drive straight to the hotel.</p>
+      <ul>
+        <li>You land around 21:10 — confirm in writing that the desk covers your flight. <button class="jump" data-id="sicilybycar">The airport desk</button> lists 08:00–23:00, and <button class="jump" data-id="aigua">an agency next to the airport</button> is staffed 24h and delivers.</li>
+        <li>Old-town parking is paid and tight; check your hotel has a space before you book this.</li>
+        <li>Bring a real credit card in the driver's name — several agencies still insist.</li>
+      </ul>
+    </div>
+    <div class="opt pick">
+      <div class="tag">Option B — my suggestion</div>
+      <h3>Pick up in town on Sunday morning</h3>
+      <p>Skip driving tired in the dark. Taxi in on Saturday night, walk Sunday, collect the car when you want it.</p>
+      <ul>
+        <li><button class="jump" data-id="odrive">Odrive</button> is on a square in the old town and open 09:00–20:30 every day; <button class="jump" data-id="alguerent">Alguerent</button> and <button class="jump" data-id="expressrent">Rent a Car Express</button> are a short walk away and both take WhatsApp bookings.</li>
+        <li>Four days instead of five, and no airport surcharge.</li>
+        <li>Ask for a child seat when you book — most of them have one.</li>
+      </ul>
+    </div>
+    <div class="opt">
+      <div class="tag">Option C</div>
+      <h3>Two days only</h3>
+      <p>Take the car just for Bosa and for the headland day, and live on foot and bikes the rest of the time.</p>
+      <ul>
+        <li>Cheapest sensible version. Town agencies rent by the day and several deliver to your hotel.</li>
+        <li>Works because the cave is reached by boat, and the beaches are reachable by bike or bus.</li>
+        <li>Risk: book the two days now — mid-September is still busy.</li>
+      </ul>
+    </div>
+    <div class="opt">
+      <div class="tag">Option D</div>
+      <h3>No car at all</h3>
+      <p>Possible, with one real sacrifice.</p>
+      <ul>
+        <li>ARST bus line 9321 runs Alghero–Capo Caccia all year; a seasonal Beach Bus covers the beaches into September. Check both timetables the week before.</li>
+        <li>The cave is a boat trip from the town quay, so it needs no car at all.</li>
+        <li>Bosa becomes a long, awkward bus day — you'd drop it, or take a guided tour.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">On the map, car pins are pale blue. The big international desk at the airport has noticeably worse reviews than the small local agencies in town, most of which sit around 4.9 with hundreds of reviews. Whoever you pick, photograph the car all over before you leave.</p>
+</section>
+
+<section>
+  <h2>Bikes</h2>
+  <p>A paved cycle path runs from the port through town, out past Maria Pia, over the lagoon bridge to Fertilia, and on toward the beaches — flat almost the whole way. Alghero to Fertilia is about 5 km and genuinely easy for a child. Alghero to Le Bombarde is about 12 km each way with one real hill near the end; 24 km round trip after a beach afternoon is a lot for a seven-year-old, so either take a tag-along or trailer, or ride out and get a lift back. There are also gentle gravel tracks inside Le Prigionette and Punta Giglio, and bikes can be hired at the Prigionette gate itself.</p>
+  <div class="opts">
+    <div class="opt">
+      <h3><button class="jump" data-id="extreme">Extreme Alghero</button></h3>
+      <p>Via Lido, near Maria Pia. Cheap city bikes — one review reports €16 for two days — helmets included, pick-up and drop-off offered. Best for the easy flat rides.</p>
+    </div>
+    <div class="opt">
+      <h3><button class="jump" data-id="raggi">Raggi di Sardegna</button></h3>
+      <p>Via Majorca, in the old town. E-bikes, hybrids and guided rides; delivers to hotels. Recommended by the park itself. Closed Sundays.</p>
+    </div>
+    <div class="opt">
+      <h3><button class="jump" data-id="bikingsard">Biking Sardinia</button></h3>
+      <p>Via Garibaldi. The serious end — road and e-bikes, open daily, will shuttle you and the bikes. Useful if one adult wants the Bosa coast road on two wheels.</p>
+    </div>
+    <div class="opt">
+      <h3><button class="jump" data-id="sardbybike">SardiniaByBike</button></h3>
+      <p>Also Via Garibaldi. Bikes, scooters and cars from one small family shop — handy if you want a bike for three days and a car for two.</p>
+    </div>
+  </div>
+  <p class="note">Ask specifically about a child's bike, a tag-along or a trailer when you book. Not every shop keeps them.</p>
+</section>
+
+<section>
+  <h2>Five days, loosely</h2>
+  <p>Treat these as building blocks. Only two things are time-sensitive: the cave boat wants a morning, and Sella &amp; Mosca only runs Monday to Friday.</p>
+  <div class="days">
+    <div class="day"><p class="when">Saturday — arrival</p><p>Land ~21:10, 10 km to town. Eat late if anything is open; the old town serves until about 22:30.</p></div>
+    <div class="day"><p class="when">Sunday — town</p><p>Old town lanes, the Coral Museum (closed 13:00–16:30), a swim at Maria Pia, and the sea walls at sunset. Collect the car in the morning if you chose Option B.</p></div>
+    <div class="day"><p class="when">Monday — bikes and stones</p><p>Cycle path out to Fertilia, Nuraghe Palmavera on the way, beach at Le Bombarde. Or ride only to Fertilia and drive the rest.</p></div>
+    <div class="day"><p class="when">Tuesday — boat day</p><p>Morning boat from the quay to the Grotta di Nettuno. Afternoon at Mugoni. Sunset from the Capo Caccia viewpoint if there's energy left.</p></div>
+    <div class="day"><p class="when">Wednesday — Bosa</p><p>Coast road south, castle, coloured streets, river boat, beach at Bosa Marina, back in the golden hour rather than the dark.</p></div>
+    <div class="day"><p class="when">Thursday — animals, then fly</p><p>Le Prigionette from 09:00, easy walk at Punta Giglio, lunch in Fertilia, evening flight. Or swap in Sella &amp; Mosca and Anghelu Ruju, which are five minutes from the airport.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Book this week</h2>
+  <ul class="checks">
+    <li><b>The cave.</b> Boat tickets from the operators on the town quay; if you want the 654 steps instead, the land slot is booked separately and the parking shuttle runs from La Stalla.</li>
+    <li><b>The car</b>, in whichever shape you choose — and the child seat with it.</li>
+    <li><b>Bikes</b>, if you want e-bikes or anything child-sized.</li>
+    <li><b>The electric buggy</b> at Le Prigionette, if you'd rather ride than walk the reserve.</li>
+    <li><b>Sella &amp; Mosca</b> by email, weekdays only.</li>
+    <li><b>La Pelosa</b>, only if you decide to swap it for Bosa — official site only, tickets open 48h ahead for most slots.</li>
+  </ul>
+</section>
+
+<footer class="col">
+  <p>Opening hours, prices and boat timings change — the Google Maps link in each pin is the quickest way to re-check before you go. Photos come from Google Maps contributors, credited on each card.</p>
+</footer>
+</div>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="cardTitle">
+  <div class="card" id="card"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const CATS = {
+  see:   {label:"See & do",        color:"#f2b452"},
+  swim:  {label:"Beaches",         color:"#57c4cf"},
+  walk:  {label:"Nature & walks",  color:"#7fb490"},
+  bike:  {label:"Bike rental",     color:"#e8594d"},
+  move:  {label:"Cars & airport",  color:"#a9bdd0"}
+};
+
+const G = (lat,lng,pid) => `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${pid}`;
+
+const PLACES = [
+  {id:"bastioni", cat:"see", name:"Alghero sea walls & old town", lat:40.5561368, lng:8.3150676,
+   text:"The raised stone promenade on top of the old Catalan fortifications, facing straight west over the water. Bars and gelaterie along the top, cannons still in place, and the medieval lanes just behind. This is where you watch the sunset.",
+   facts:[["Open","Always"],["Cost","Free"],["Sunset","About 19:25 in late September"]],
+   img:"https://lh3.googleusercontent.com/grass-cs/ACvplmPsheTnvD-8DggwUECRnxOLCiZkD9JPRfbYvCzTlSsaMIFDlEsvrw3cqRTggsJg6w-iARmbljG9ji23q8LjZhsMLUkoSyUPjawSzY5RxJF3sgx7QyY0m05XFhZoOeVJMSsPiKcCpqlEvKs=s4800-w800-h600",
+   credit:"Rod Piz / Google Maps",
+   url:"https://maps.google.com/?cid=12945915486338483795"},
+
+  {id:"coral", cat:"see", name:"Coral Museum", lat:40.5571146, lng:8.3161944,
+   text:"Alghero's coast is called the Coral Riviera, and red coral has been fished and carved here for centuries. Small museum in a handsome villa: a bit of marine biology, a bit of history, a lot of jewellery, plus a children's area and a garden. An hour, no more.",
+   facts:[["Hours","10:30–13:00, 16:30–19:00 daily"],["Cost","About €7"],["Good for","A hot or rainy hour in town"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjB6osxpf-Xa6J1pA7bwTEH9Pp-lop97t4E3iX8Hlw4K6qag_HVvtlHHhO616_dkixzdSJRm0BELzvBqYZ6h9Ohudvxh8t1RIk01d_hmsJyrMyOLudvQHNkoTFp-xBbcfT1M8ss8qmbcf9Htog=s4800-w800-h600",
+   credit:"Mario Figoni / Google Maps",
+   url:"https://maps.google.com/?cid=13222085837771886291"},
+
+  {id:"frecce", cat:"see", name:"Boats to the cave — town quay", lat:40.5602904, lng:8.314092,
+   text:"Departure point for the boats to the Grotta di Nettuno, on the harbour below the walls. Roughly 40 minutes each way under the Capo Caccia cliffs, past the pierced islet of Foradada. Departures usually mid-morning and mid-afternoon; buy on the quay.",
+   facts:[["Boat","About €17 per adult"],["Cave entry","Separate, bought at the cave"],["Tip","Arrive 15 minutes early for a seat outside"]],
+   url:G(40.5602904,8.314092,"ChIJZYLHbN7x3BIRB2_eHTwKi1Q")},
+
+  {id:"mariapia", cat:"swim", name:"Spiaggia Maria Pia", lat:40.5814917, lng:8.3095777,
+   text:"The town beach proper: white sand, pines behind for shade, shallow at the edge. Walkable or an easy cycle from the old town, and served by local buses. Not the prettiest beach around here, but by far the easiest.",
+   facts:[["From town","~40 min walk, ~15 min by bike"],["Cost","Free, paid loungers available"],["Water","Shallow entry, safe for children"]],
+   url:G(40.5814917,8.3095777,"ChIJ1b189Bzz3BIRh65B-M3tRqQ")},
+
+  {id:"fertilia", cat:"see", name:"Fertilia", lat:40.5914793, lng:8.2855975,
+   text:"A small planned village from the 1930s next to the airport, settled after the war by families from Istria. Arcaded square, a quiet marina, a couple of good simple restaurants, and the point where the cycle path from Alghero arrives. A nice, low-effort stop on the last day before flying.",
+   facts:[["From Alghero","6 km, flat cycle path"],["Airport","3 km"],["Good for","Lunch, a sit by the water"]],
+   url:G(40.5914793,8.2855975,"ChIJP5VZwcLt3BIREc28ATXEdDE")},
+
+  {id:"palmavera", cat:"see", name:"Nuraghe Palmavera", lat:40.5947574, lng:8.2426469,
+   text:"A dry-stone tower from roughly 1500 BC with the remains of a village of round huts around it. You can walk inside the tower and up the internal stair. Sardinia has thousands of these and nobody knows what language the builders spoke. Right on the main road to the park, with a small café.",
+   facts:[["Hours","10:00–19:00 daily"],["Cost","About €7; combined ticket with Anghelu Ruju"],["Time needed","30–45 minutes"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjAZqqGKPjEs5ME53hvyhwk64LfqLstBScZY2I-0AYd-RROmMmJA8_j8JmZy8r7splLr8koeap_19Tr2CeDiAc_lU8MmH_N5dTtk5wNkJY5vjefPcabbnYWXkIkWzs0g6sK3yc1BxtiN98Dp-Q=s4800-w800-h600",
+   credit:"Esther / Google Maps",
+   url:"https://maps.google.com/?cid=15046163016744414153"},
+
+  {id:"bombarde", cat:"swim", name:"Le Bombarde", lat:40.5843301, lng:8.2586835,
+   text:"The big popular beach of the park: white sand, clear blue water, bars and toilets, and a hotel taking up part of it. The natural end point of the bike ride from Alghero, though the last stretch has one proper hill.",
+   facts:[["From Alghero","12 km"],["Parking","Paid, some free dirt spaces"],["Loungers","Roughly €20–30 a day in September"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjCmEWUoBvaz6jC-1kReVihVzU2enzB_1124cIFKiMhc0jHia4qFhW0egwJAXNPl6iV_ItWdhjeUEa1LEuIr90LuzKUkGZBsSUoHBetWH_JM2wzV3GMO7r7f0gZzqe9qZ1zFNJZ5UvImm2gsnyOKlORP7Q=s4800-w800-h600",
+   credit:"Stefania Bortolotti / Google Maps",
+   url:"https://maps.google.com/?cid=9648604954502839096"},
+
+  {id:"lazzaretto", cat:"swim", name:"Spiaggia del Lazzaretto", lat:40.5824848, lng:8.2468385,
+   text:"Bombarde's smaller, more sheltered neighbour, under an old watchtower. Calm water, fine sand, a beach bar and organised parking. Gets busy but rarely feels packed once September starts.",
+   facts:[["From Alghero","13 km"],["Parking","About €2 an hour"],["Note","Small — arrive before midday for shade"]],
+   url:G(40.5824848,8.2468385,"ChIJOwX8L57u3BIRDAL5PaGgIP4")},
+
+  {id:"mugoni", cat:"swim", name:"Spiaggia di Mugoni", lat:40.6168706, lng:8.2057011,
+   text:"Deep inside the sheltered bay, so the sea is flat and shallow a long way out — the calmest water in the area for a child. A pine wood grows right to the sand, which means free shade all afternoon. Walk left from the car park to get away from the crowd.",
+   facts:[["From Alghero","20 km, ~25 min"],["Water","Very shallow and calm"],["Parking","Paid in season, keep your ticket"]],
+   img:"https://lh3.googleusercontent.com/grass-cs/ACvplmPUJ9eBBBUHXlgLu5apEVOc_sdaC-X1Pt_iaDjKQuY6h0zd3-I8T7nm5NiCGQKDIVxlvMMuATFrlQK8fZPN28QCX9GsApQNi91Ga1zNynfUzhUIVtLNN0eH2VzoNGopAV0J53M=s4800-w800-h600",
+   credit:"Francesca Marchetti / Google Maps",
+   url:"https://maps.google.com/?cid=8126190700216849868"},
+
+  {id:"grotta", cat:"see", name:"Grotta di Nettuno", lat:40.5649903, lng:8.1602578,
+   text:"A sea cave at the foot of Capo Caccia with one of the largest salt lakes in Europe inside it, plus a two-metre stalagmite the guides call the holy water font. Guided visits of about 30 minutes leave every hour. Arrive by boat from Alghero, or walk down 654 cliff steps from the cape — that route needs its own booking and a shuttle from the La Stalla car park.",
+   facts:[["Hours","09:00–19:00, sea permitting"],["Entry","About €14–18 adult, less for ages 6–17"],["With a child","Take the boat, not the stairs"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjA36atdZ1EVEOU4wxEtURRKIEw8V4M2A46Gc6CAOcTS1OlDlfXlEc3EeV16LjiLahOvRGhB3dZJd1P7-Htk-btuDgJf1qrbnBMveh_UxHa2QMhSqPY8HPnMJ_LpBrexYiryImP-3tX5uN_Ybr6MbQzQVg=s4800-w800-h600",
+   credit:"Va Ney / Google Maps",
+   url:"https://maps.google.com/?cid=14031473402518028972"},
+
+  {id:"capocaccia", cat:"walk", name:"Capo Caccia viewpoint", lat:40.5812589, lng:8.1545766,
+   text:"The end of the road on the headland, 200 m above the sea, looking down on the Foradada islet and the cliffs where the vultures nest. Free, no facilities, street parking only, and reliably one of the best sunsets in north-west Sardinia. Windy — take a layer.",
+   facts:[["From Alghero","24 km, ~35 min"],["Cost","Free"],["Best time","The hour before sunset"]],
+   url:G(40.5812589,8.1545766,"ChIJO_3g7Xfp3BIRJN04GkKZ72g")},
+
+  {id:"prigionette", cat:"walk", name:"Le Prigionette (Noah's Ark)", lat:40.6162774, lng:8.1878091,
+   text:"An old prison farm turned wildlife reserve: albino donkeys from Asinara, fallow deer, small wild Giara horses, boar, and griffon vultures over the cliffs. Marked trails on foot, by bike or by electric buggy. Playground, picnic area and bike hire at the gate; there's a feeding trough near reception if the animals stay hidden on the trails.",
+   facts:[["Hours","09:00–18:00, last entry earlier"],["Cost","A few euros per person"],["Buggy","From about €20/hour, book ahead"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjCv7fAju8pkMcq_Bc2PD2B_3bxB3NI-6uqo-_pdcnf3hhC96sNcSvV6uZO2Q2S0rsqMDQYpIYeQbxQ0PvOiqD5cmCcn616ySx2obCIN0QHDI99VYSuLPVFyuaMN6YydbG_joDKQDnCpwWLNKk4=s4800-w800-h600",
+   credit:"Oasi Naturale Le Prigionette / Google Maps",
+   url:"https://maps.google.com/?cid=12377163087545757219"},
+
+  {id:"puntagiglio", cat:"walk", name:"Punta Giglio", lat:40.567904, lng:8.20447,
+   text:"A flat headland covered in pines and low scrub, with a wide track out to abandoned World War II gun emplacements and a bunker at the tip. Big views across the bay to Capo Caccia. Easy walking, good on bikes, and there are small rocky coves to swim from on the way.",
+   facts:[["Walking","Easy, mostly flat track"],["Cost","Free; a parking fee is sometimes charged"],["Also","Rideable on a mountain bike"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjAyUOyawEWyBiW78eFjOFm92HhnZ0xK9bICPgZ-sOIZYdzChNbt2bUXD3coZVgIU49MkxHKCQ43AA-iTnKn5CQlEZokoy3B7S-8pCpD2K-dVwzFuruq8hfG5trDN4CXGK_D65-eopkE_9z6kQ=s4800-w800-h600",
+   credit:"Massimo Deriu / Google Maps",
+   url:"https://maps.google.com/?cid=10597321750608279227"},
+
+  {id:"sella", cat:"see", name:"Tenute Sella & Mosca", lat:40.6420356, lng:8.3327876,
+   text:"A 500-hectare wine estate founded in 1899, with historic cellars, a small museum of the company and the necropolis dug up on its land, and a tasting at the end. Tours run weekdays, in Italian or English, by prior booking only. There's also a shop and a restaurant if you just want lunch and a bottle.",
+   facts:[["Tours","Mon–Fri, booking required"],["Booking","visit@sellaemosca.com"],["From airport","About 10 minutes"]],
+   url:G(40.6420356,8.3327876,"ChIJl1GTQ8Ly3BIR3nuuVoQU_VM")},
+
+  {id:"anghelu", cat:"see", name:"Necropolis of Anghelu Ruju", lat:40.6330084, lng:8.3264063,
+   text:"The largest prehistoric burial site in Sardinia: 38 chambers cut down into the soft rock from about 3000 BC, a few carved with bull horns. It's an open field you walk around, and small people can climb into some of the tombs. Quiet, strange, and about five minutes from the winery.",
+   facts:[["Hours","10:00–19:00"],["Cost","Combined ticket with Nuraghe Palmavera"],["Time needed","About an hour"]],
+   url:G(40.6330084,8.3264063,"ChIJkW8sVt3x3BIRfNzne6wOITI")},
+
+  {id:"bosacastle", cat:"see", name:"Bosa — Malaspina castle", lat:40.2974847, lng:8.5051501,
+   text:"A 12th-century hill fortress above a town of pastel houses on the river Temo. Inside the walls is a small church covered in 14th-century frescoes, and a tower you can climb for the view over the coloured roofs. The walk up through the Sa Costa quarter is steep but short, and the drive down the coast road to get here is half the point.",
+   facts:[["Hours","10:00–20:00"],["Cost","About €5–6.50"],["From Alghero","45 km on the SP105, ~1h15"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjCT8QtW045XeIzN_QWFVNqY3C74_rzJyjaTFgMVpiwWWFXFKs3CmDYBvH5FIk8gbYlf0QM5sunZeb4D42-ERSNqqoK3Lgv8k_IKEhjPyS-z-1hybTqFXQlJjwlcqYLGlWLaCNmd9YzLf2APPuU=s4800-w800-h600",
+   credit:"Damien Fauchot / Google Maps",
+   url:"https://maps.google.com/?cid=594455716783406595"},
+
+  {id:"bosamarina", cat:"swim", name:"Bosa Marina", lat:40.288064, lng:8.4796525,
+   text:"Where the river meets the sea, two kilometres below the old town: a long shallow beach under another Aragonese tower, with bars, pedalos and windsurf hire. Small boats run one-hour trips up the river from the quay in Bosa itself.",
+   facts:[["Water","Shallow and safe for children"],["Parking","About €1 an hour on the street"],["River trips","From the Lungotemo in town"]],
+   img:"https://lh3.googleusercontent.com/place-photos/AG9NLjB8fjtMOlq7gGX00jEF80zhGJYDJKYAim2atSF4ZlleMN5GDkvv-1bSE4zYigsBBA2zV2Ohox-MbAq6zAf6Voy-IkCz5Q19AbQiYANOTxBN2SmFMUnKA51T_G2AoUFbJkgGdnO1_Q29nJnNmg=s4800-w800-h600",
+   credit:"Angelo Dettori / Google Maps",
+   url:"https://maps.google.com/?cid=11308286675710457294"},
+
+  {id:"extreme", cat:"bike", name:"Extreme Alghero — bikes & scooters", lat:40.5792726, lng:8.3120532,
+   text:"Small shop on Via Lido near Maria Pia beach, right by the cycle path. Cheap city bikes with helmets, flexible hours, pick-up and drop-off offered. The sensible choice for flat family rides.",
+   facts:[["Hours","09:30–13:00, 16:30–19:30; Sun morning"],["Phone","+39 328 919 5168"],["Price","One review: €16 for two days"]],
+   url:G(40.5792726,8.3120532,"ChIJI1ckE_nx3BIRaIumX5iDQBI")},
+
+  {id:"raggi", cat:"bike", name:"Raggi di Sardegna — rent a bike", lat:40.5567065, lng:8.3139817,
+   text:"In the old town on Via Majorca. E-bikes, hybrids, guided rides, and delivery to your hotel. Carries the park's environmental quality mark and is the shop the park itself points people to. Closed Sundays.",
+   facts:[["Hours","09:30–13:00, 16:00–19:00; closed Sun"],["Phone","+39 334 305 2480"],["Good for","E-bikes, guided family rides"]],
+   url:G(40.5567065,8.3139817,"ChIJ2VZQd97x3BIRHF41IVqNX7k")},
+
+  {id:"bikingsard", cat:"bike", name:"Biking Sardinia", lat:40.566912, lng:8.3192955,
+   text:"The proper cycling outfit on Via Garibaldi: road bikes, e-bikes, an app for booking, hotel pick-up and one-way drops to other towns. Open every day. The one to call if an adult wants to ride the Bosa coast road.",
+   facts:[["Hours","09:00–20:00 daily"],["Phone","+39 079 492 7210"],["Extra","Can shuttle you and the bikes"]],
+   url:G(40.566912,8.3192955,"ChIJFSA7oMfx3BIRC4agtp5uycI")},
+
+  {id:"sardbybike", cat:"bike", name:"SardiniaByBike", lat:40.5688946, lng:8.3196449,
+   text:"A husband-and-wife shop on Via Garibaldi renting bikes, scooters and cars from the same counter, with a small repair kit thrown in. Useful if you want bikes for three days and a car for two without dealing with two companies.",
+   facts:[["Hours","09:00–13:00, 16:00–19:00"],["Phone","+39 347 930 6282"],["Also rents","Scooters and cars"]],
+   url:G(40.5688946,8.3196449,"ChIJu0cCofrx3BIRMDwWsYocv6Y")},
+
+  {id:"odrive", cat:"move", name:"Odrive Rent a Car", lat:40.5568188, lng:8.3179757,
+   text:"On Piazza della Mercede in the old town, open 09:00–20:30 every day, and will also hand over at the airport. Full-insurance options without a deposit block, which removes the usual credit-card argument. The easiest fit for picking the car up on Sunday morning.",
+   facts:[["Hours","09:00–20:30 daily"],["Phone","+39 347 814 4695"],["Note","Ask for a child seat when booking"]],
+   url:G(40.5568188,8.3179757,"ChIJPVe9gefx3BIRpLQ8NcRPuD8")},
+
+  {id:"alguerent", cat:"move", name:"Alguerent a car", lat:40.5695772, lng:8.3196128,
+   text:"Tiny family agency on Via Don Minzoni, a few minutes from the centre. Books over WhatsApp with no payment up front, full insurance included, no deposit held. They also store luggage, which is handy on the last day before an evening flight.",
+   facts:[["Phone","+39 338 800 8916"],["Booking","WhatsApp, pre-book before landing"],["Extra","Left-luggage service"]],
+   url:G(40.5695772,8.3196128,"ChIJCQo7pPrx3BIRAHwNxbTW3cw")},
+
+  {id:"expressrent", cat:"move", name:"Rent a Car Express", lat:40.5612062, lng:8.322062,
+   text:"On Via Sebastiano Satta, east side of the centre. Basic cars, transparent pricing, options with no deposit and no international licence needed. Closed over lunch and on Sunday afternoons, so plan the pick-up hour.",
+   facts:[["Hours","09:00–13:00, 16:30–19:00"],["Phone","+39 079 985937"],["Note","Sunday mornings only at weekends"]],
+   url:G(40.5612062,8.322062,"ChIJe0Gl5ejx3BIRAr988WTU0so")},
+
+  {id:"aigua", cat:"move", name:"Aiguarentacar — beside the airport", lat:40.6284368, lng:8.2971645,
+   text:"A one-man agency a few hundred metres from the terminal, reachable at any hour and used to late arrivals; delivers, arranges child seats, and answers on WhatsApp. The realistic answer if you want the car the moment you land at 21:10.",
+   facts:[["Hours","Staffed 24h"],["Phone","+39 348 289 7204"],["Distance","Walking distance from the terminal"]],
+   url:G(40.6284368,8.2971645,"ChIJwVpB-m_t3BIRgZb4SVSn6Oo")},
+
+  {id:"sicilybycar", cat:"move", name:"Airport rental desks", lat:40.6307939, lng:8.295479,
+   text:"The in-terminal desks, listed as open 08:00–23:00, so they should cover your arrival — confirm in writing anyway. Cheaper online, but reviews are much weaker than the small local agencies, and they are strict about a physical credit card in the main driver's name.",
+   facts:[["Hours","08:00–23:00"],["Bring","Credit card in the driver's name"],["Tip","Photograph the car before leaving"]],
+   url:G(40.6307939,8.295479,"ChIJ46Bmc27t3BIR2ExN-IH5Mfc")},
+
+  {id:"airport", cat:"move", name:"Alghero–Fertilia airport (AHO)", lat:40.6317, lng:8.2907,
+   text:"A small single-terminal airport 10 km from town. Taxis wait outside arrivals and the ride into Alghero takes about 15 minutes; an airport bus also runs to the centre. Your Wizz Air flight lands here around 21:10 on the Saturday.",
+   facts:[["To Alghero","10 km, ~15 min by taxi"],["To Fertilia","3 km"],["To the park beaches","15–25 min"]],
+   url:"https://www.google.com/maps/search/?api=1&query=Alghero-Fertilia+Airport"}
+];
+
+/* ---------- detail dialog ---------- */
+const scrim = document.getElementById('scrim');
+const card  = document.getElementById('card');
+let lastFocus = null;
+
+function openCard(id){
+  const p = PLACES.find(x=>x.id===id); if(!p) return;
+  lastFocus = document.activeElement;
+  const c = CATS[p.cat];
+  card.innerHTML = `
+    ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.remove()">` : ``}
+    <div class="body">
+      <div class="cat"><span class="dot" style="background:${c.color}"></span>${c.label}</div>
+      <h3 id="cardTitle">${p.name}</h3>
+      <p>${p.text}</p>
+      <ul class="facts">${p.facts.map(f=>`<li><span>${f[0]}</span><span>${f[1]}</span></li>`).join('')}</ul>
+      <div class="actions">
+        <a class="btn" href="${p.url}" target="_blank" rel="noopener">Open in Google Maps</a>
+        <button class="btn ghost" id="closeCard">Close</button>
+      </div>
+      ${p.credit ? `<p class="credit">Photo: ${p.credit}</p>` : ``}
+    </div>`;
+  scrim.classList.add('open');
+  document.getElementById('closeCard').focus();
+  document.getElementById('closeCard').onclick = closeCard;
+}
+function closeCard(){
+  scrim.classList.remove('open');
+  if(lastFocus) lastFocus.focus();
+}
+scrim.addEventListener('click', e=>{ if(e.target===scrim) closeCard(); });
+document.addEventListener('keydown', e=>{
+  if(e.key!=='Escape') return;
+  if(scrim.classList.contains('open')) closeCard();
+  else if(document.querySelector('.mapshell').classList.contains('full')) setFull(false);
+});
+
+document.querySelectorAll('.jump').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    const id = b.dataset.id, p = PLACES.find(x=>x.id===id);
+    if(p && window.__map){
+      document.querySelector('.mapshell').scrollIntoView({behavior:'smooth', block:'center'});
+      window.__map.setView([p.lat,p.lng], 13, {animate:true});
+    }
+    openCard(id);
+  });
+});
+
+/* ---------- filter chips ---------- */
+const chips = document.getElementById('chips');
+const active = new Set(Object.keys(CATS));
+Object.entries(CATS).forEach(([key,c])=>{
+  const b = document.createElement('button');
+  b.className='chip'; b.style.color=c.color; b.setAttribute('aria-pressed','true');
+  b.innerHTML = `<span class="dot"></span><span style="color:var(--paper)">${c.label}</span>`;
+  b.onclick = ()=>{
+    active.has(key) ? active.delete(key) : active.add(key);
+    b.setAttribute('aria-pressed', active.has(key));
+    render();
+  };
+  chips.appendChild(b);
+});
+const views = document.createElement('div');
+views.className='views';
+views.innerHTML = `<button data-v="all">Everything</button><button data-v="alghero">Alghero & the park</button><button data-v="bosa">Bosa</button><button data-b="satellite" aria-pressed="true">Satellite</button><button data-b="terrain" aria-pressed="false">Terrain</button>`;
+chips.appendChild(views);
+
+const shell = document.querySelector('.mapshell');
+const expandBtn = document.createElement('button');
+expandBtn.dataset.x = 'full';
+expandBtn.textContent = 'Expand map';
+views.appendChild(expandBtn);
+
+function setFull(on){
+  shell.classList.toggle('full', on);
+  document.body.classList.toggle('mapfull', on);
+  expandBtn.textContent = on ? 'Exit full screen' : 'Expand map';
+  if(window.__map){
+    window.__map.scrollWheelZoom[on ? 'enable' : 'disable']();
+    setTimeout(()=>window.__map.invalidateSize(), 60);
+  }
+  if(!on) shell.scrollIntoView({block:'center'});
+}
+expandBtn.addEventListener('click', ()=>setFull(!shell.classList.contains('full')));
+
+/* ---------- map ---------- */
+const markers = {};
+let map = null;
+
+function render(){
+  Object.entries(markers).forEach(([id,m])=>{
+    const p = PLACES.find(x=>x.id===id);
+    const on = active.has(p.cat);
+    if(map){ on ? m.addTo(map) : map.removeLayer(m); }
+    else { m.style.display = on ? 'block' : 'none'; }
+  });
+}
+
+const BASEMAPS = {
+  satellite:{
+    url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    labels:'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+    attr:'Imagery &copy; Esri, Maxar, Earthstar Geographics'
+  },
+  terrain:{
+    url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+    attr:'&copy; Esri, HERE, Garmin, OpenStreetMap contributors'
+  }
+};
+let baseLayer=null, labelLayer=null, currentBase='satellite';
+
+function setBasemap(key){
+  const b = BASEMAPS[key]; if(!b || !map) return;
+  currentBase = key;
+  let ok=0, bad=0;
+  if(baseLayer) map.removeLayer(baseLayer);
+  if(labelLayer){ map.removeLayer(labelLayer); labelLayer=null; }
+  baseLayer = L.tileLayer(b.url, {maxZoom:18, maxNativeZoom:17, attribution:b.attr});
+  baseLayer.on('tileload', ()=>{ ok++; });
+  baseLayer.on('tileerror', ()=>{
+    bad++;
+    if(ok===0 && bad>5){
+      if(key==='satellite') setBasemap('terrain');
+      else buildFallback();
+    }
+  });
+  baseLayer.addTo(map);
+  if(b.labels){
+    labelLayer = L.tileLayer(b.labels, {maxZoom:18, maxNativeZoom:17, opacity:.9}).addTo(map);
+  }
+  views.querySelectorAll('[data-b]').forEach(x=>x.setAttribute('aria-pressed', x.dataset.b===key));
+}
+
+function buildLeaflet(){
+  map = L.map('map', {scrollWheelZoom:false}).setView([40.55,8.27], 11);
+  window.__map = map;
+  setBasemap('satellite');
+
+  PLACES.forEach(p=>{
+    const m = L.marker([p.lat,p.lng], {
+      icon: L.divIcon({className:'', iconSize:[16,16], iconAnchor:[8,8],
+        html:`<div class="pin" style="background:${CATS[p.cat].color}"></div>`}),
+      title:p.name, keyboard:true
+    });
+    m.bindTooltip(p.name, {direction:'top', offset:[0,-8]});
+    m.on('click', ()=>openCard(p.id));
+    m.on('keypress', ()=>openCard(p.id));
+    markers[p.id]=m;
+  });
+  render();
+  views.querySelectorAll('button').forEach(b=>{
+    if(b.dataset.x) return;
+    b.onclick = ()=>{
+      if(b.dataset.b){ setBasemap(b.dataset.b); return; }
+      const v=b.dataset.v;
+      if(v==='all')     map.fitBounds([[40.27,8.13],[40.66,8.53]], {padding:[30,30]});
+      if(v==='alghero') map.fitBounds([[40.54,8.14],[40.65,8.35]], {padding:[30,30]});
+      if(v==='bosa')    map.setView([40.293,8.495], 13);
+    };
+  });
+  map.fitBounds([[40.27,8.13],[40.66,8.53]], {padding:[30,30]});
+}
+
+function buildFallback(){
+  if(document.getElementById('fallback').style.display==='block') return;
+  document.getElementById('map').style.display='none';
+  const fb = document.getElementById('fallback');
+  fb.style.display='block';
+  const LAT=[40.26,40.67], LNG=[8.12,8.55];
+  Object.keys(markers).forEach(k=>delete markers[k]);
+  PLACES.forEach(p=>{
+    const b=document.createElement('button');
+    b.style.background=CATS[p.cat].color;
+    b.style.left = ((p.lng-LNG[0])/(LNG[1]-LNG[0])*100)+'%';
+    b.style.top  = ((LAT[1]-p.lat)/(LAT[1]-LAT[0])*100)+'%';
+    b.title=p.name; b.setAttribute('aria-label',p.name);
+    b.onclick=()=>openCard(p.id);
+    fb.appendChild(b);
+    markers[p.id]=b;
+  });
+  map=null; window.__map=null;
+  render();
+}
+
+window.addEventListener('load', ()=>{
+  if(window.L && L.map) { try { buildLeaflet(); } catch(e){ buildFallback(); } }
+  else buildFallback();
+});
+</script>
+</body>
+</html>
